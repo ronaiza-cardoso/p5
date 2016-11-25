@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Making a JavaScript Search on the Old Way | Ronaiza Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/app.css">
+  <!-- <link rel='stylesheet' href='http://fonts.useso.com/css?family=Source+Code+Pro'> -->
+  
+</head>
+
+<body>
+  <nav class="app-nav">
+  
+    
+      <a href="/.">home</a>
+    
+  
+    
+      <a href="/archives">archive</a>
+    
+  
+</nav>
+
+  <main class="post">
+  <article>
+  <h1 class="article-title">
+    <a href="/2016/11/15/Making-a-JavaScript-Search-on-the-Old-Way/">Making a JavaScript Search on the Old Way</a>
+  </h1>
+
+  <section class="article-meta">
+    <p class="article-date">November 15 2016</p>
+  </section>
+
+  <section class="article-entry">
+    <p>#Busca Em JavaScript</p>
+<p>##Como tudo começou</p>
+<p>Nesse artigo eu irei descrever alguns métodos de busca que tenho estudado. Será<br>uma série de artigos com várias formas de implementar buscas em sua aplicação.<br>Irei começar com a forma mais primitiva que conheço usando o JavaScript Vanila. Você que tem medo de lidar com essa linguagem por causa de suas libs e frameworks vai ficar mais tranquilo com esse código, a única letrinha da sopa que faz parte do ecosistema da linguagem é o próprio JS</p>
+<p>##SHHHHOWWW MEEEE THE COOOOODEE!</p>
+<p>O código fará uma busca estática em um array de frases.</p>
+<p>Primeiramente fora bagunça, logo vamos criar dois arquivos, o primeiro será o index.html responsável por conter as entradas de nossa busca. É um arquivo bem simples com um input, um botão de busca e o span para exibir o resultado</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Lista Telefônica<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- Latest compiled and minified CSS --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span> &gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">      .jumbotron</div><div class="line">      &#123;</div><div class="line">        width: 400px;</div><div class="line">        text-align: center;</div><div class="line">        margin-left: auto;</div><div class="line">        margin-right: auto;</div><div class="line">        margin-top: 20px;</div><div class="line">      &#125;</div><div class="line">      .table&#123;</div><div class="line">        margin-top: 20px;</div><div class="line">      &#125;</div><div class="line">      .form-control&#123;</div><div class="line">        margin-bottom: 5px;</div><div class="line">      &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"jumbotron"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">placeholder</span>=<span class="string">"Digite a sua busca"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"search"</span>&gt;</span> <span class="comment">&lt;!-- local onde o texto será buscado  --&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-primary btn-block"</span> <span class="attr">onclick</span>=<span class="string">"search();"</span> &gt;</span>Busca<span class="tag">&lt;/<span class="name">button</span>&gt;</span> <span class="comment">&lt;!-- referencia para a função que será executada no arquivo serch.js --&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Resultado:<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"result"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"></div><div class="line">      <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'search.js'</span>&gt;</span><span class="xml"> <span class="comment">&lt;!-- referencia para o arquivo que fará a busca --&gt;</span></span></div><div class="line"></div><div class="line">      <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>agora vamos construir a nossa busca. Vamos colocar o nosso código dentro de uma função, assim quando o usuário apertar o botão de busca o código dentro da nossa função será executada</p>
+<pre><code>function search() {
+
+}
+</code></pre><p>agora vamos escrever a função para fazer a busca em nosso array</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">search</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="keyword">var</span> arr = [<span class="string">"wht is ec6?!"</span>,<span class="string">"angular?! é de comer ou passar na testa?"</span>,<span class="string">"manda node hehehe"</span>]; <span class="comment">// frases da nossa busca</span></div><div class="line"><span class="keyword">var</span> search = <span class="built_in">document</span>.getElementById(<span class="string">"search"</span>).value; <span class="comment">// pega o que o usuário coloca no input</span></div><div class="line">	<span class="keyword">var</span> testKey = <span class="literal">null</span>;</div><div class="line">	<span class="keyword">var</span> result = <span class="string">""</span>;</div><div class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> key <span class="keyword">in</span> arr ) &#123;</div><div class="line">		<span class="keyword">var</span> auxArr = arr[key].split(<span class="string">" "</span>);</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">var</span> keyTwo <span class="keyword">in</span> auxArr)&#123;</div><div class="line">			<span class="keyword">if</span> ( auxArr.indexOf( search ) &gt; <span class="number">-1</span> )&#123; <span class="comment">// verifica se existe a palavra dentro do array</span></div><div class="line">				<span class="keyword">if</span>(testKey != key) &#123; <span class="comment">// verifica se testKey é diferente de key, testKey tem o valor nulo, logo esse if na primeira volta irá dar true</span></div><div class="line">					testKey = key; <span class="comment">//então o valor de testKey (null) será atribuito a essa variável para evitar que as frases sejam repetidas</span></div><div class="line">					result += <span class="string">"&lt;p&gt;"</span> + arr[key] + <span class="string">"&lt;/p&gt;"</span>; <span class="comment">//e depois o resultado será atribuido a result</span></div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">document</span>.getElementById(<span class="string">"result"</span>).innerHTML = result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Bom pessoal, isso é tudo. Espero que seja útil para vocês de alguma forma e que mexam no código, brinquem, estrague e depois concertem. Pretendo<br>continuar a fazer artigos nesse sentido mostrando a evolução da linguagem. Em caso de dúvidas, sugestões ou críticas podem entrar em contato<br>comigo por aqui ou pelo telegram @Ronaiza :)</p>
+
+  </section>
+</article>
+
+  <div class="sharing grid">
+  <section class="profile grid-item grid">
+    <img class="avatar" src="https://s.gravatar.com/avatar/f45e8318bf829e33e34c1b8b10e2cb1d?s=80" alt="avatar" />
+    <div class="grid-item">
+      <p class="title"> Ronaiza Card </p>
+      <p class="subtitle"> If Internet Explorer is brave enough to ask to be your default browser, you're brave enough to ask for help to a older developer </p>
+    <div>
+  </section>
+
+  <section class="share-btns">
+    <!-- <p> share it if you like it~ </p> -->
+    <a
+  class="twitter-share-button"
+  data-size="large"
+  data-via="DrakeLeung"
+  href="https://twitter.com/intent/tweet?text=#Busca Em JavaScript"
+>
+  Tweet
+</a>
+
+<script>
+  window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  js.async = true;
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));
+</script>
+
+  </section>
+</div>
+
+
+  
+</main>
+
+</body>
+</html>
