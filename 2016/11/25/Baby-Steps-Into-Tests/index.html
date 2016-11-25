@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Baby Steps Into Tests | Ronaiza Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/app.css">
+  <!-- <link rel='stylesheet' href='http://fonts.useso.com/css?family=Source+Code+Pro'> -->
+  
+</head>
+
+<body>
+  <nav class="app-nav">
+  
+    
+      <a href="/.">home</a>
+    
+  
+    
+      <a href="/archives">archive</a>
+    
+  
+</nav>
+
+  <main class="post">
+  <article>
+  <h1 class="article-title">
+    <a href="/2016/11/25/Baby-Steps-Into-Tests/">Baby Steps Into Tests</a>
+  </h1>
+
+  <section class="article-meta">
+    <p class="article-date">November 25 2016</p>
+  </section>
+
+  <section class="article-entry">
+    <p>#Baby Steps Tests</p>
+<p>esse artigo irá te guiar dentro do mundo de teste unitário no NodeJS</p>
+<p>##Setup Ambiente</p>
+<p>para acompanhar os códigos desse projeto é preciso ter o NodeJS na em seu ambiente de trabalho, nesse <a href="https://nodejs.org/en/download/current/" target="_blank" rel="external">link</a><br>você pode fazer o download de acordo com o seu sistema operacional.</p>
+<p>Esse projeto irá utilizar o test runner <a href="https://mochajs.org/" target="_blank" rel="external">mocha</a> e a biblioteca de asserções <a href="http://chaijs.com/" target="_blank" rel="external">chai</a>*</p>
+<pre><code>acesse o site de cada um para maiores informações
+</code></pre><p>##Iniciando o projeto</p>
+<p>Todas as dependencias necessárias para rodar um projeto node deve ser colocado no package.json<br>ele pode ser criado por meio do comando <code>npm init</code>. Esse comando irá criar um arquivo de nome<br>package.json com todas as informações do seu projeto.</p>
+<pre><code>name: (baby-steps-test)
+version: (1.0.0)
+description: just a project to show some baby steps on test in NodeJS
+entry point: (Calc.js)
+test command: mocha -w
+git repository: https://github.com/yesroh/baby-steps-tests.git
+keywords: TESTS, NODE, JS
+author: Ronaiza Cardoso &lt;ronaizacard@gmail.com&gt;
+license: (ISC) MIT
+</code></pre><p>em  <code>scripts</code> podemos colocar atalhos que podemos usar para agilizar o nosso desempenho<br>alí coloquei o <code>mocha</code> com o parâmetro <code>-w</code> para que o mocha fique vendo o nosso arquivo enquanto<br>fazemos o teste. Para utilizar o mocha por meio do cli(command line interface) você precisa instalar<br>ele globalmente por meio do comando <code>npm install mocha -g</code></p>
+<p>##Primeiro teste</p>
+<p>Vamos testar uma classe calculadora, segue abaixo a classe</p>
+<script src="https://gist.github.com/yesroh/57eb3268e54efeabf6daf4fe22b6bd69.js"></script>
+
+<p>agora dentro da pasta test vamos criar os nossos testes, o nome desse teste será calc.spec.js, é<br>uma boa prática utilizar como nome dos nossos testes o nome da classe que será testada e o .spec.<br>assim o mocha saberá que aquele arquivo se trata de um teste.</p>
+<p>No arquivo abaixo estamos importando a classe calc e as a lib do chai, para que assim possamos<br>utilizar o a dot notation em nosso teste.</p>
+<p>na linha 7 colocamos o nome do aquivo que iremos testar, no it o que esse teste deverá fazer</p>
+<script src="https://gist.github.com/yesroh/0c312669526512c5c95ba969f975bcb4.js"></script>
+
+<p>aqui você poderá conferir os demais testes da nossa classe.</p>
+<script src="https://gist.github.com/yesroh/62e602adf5fefc8d693390346b351915.js"></script>
+
+  </section>
+</article>
+
+  <div class="sharing grid">
+  <section class="profile grid-item grid">
+    <img class="avatar" src="https://s.gravatar.com/avatar/f45e8318bf829e33e34c1b8b10e2cb1d?s=80" alt="avatar" />
+    <div class="grid-item">
+      <p class="title"> Ronaiza Card </p>
+      <p class="subtitle"> If Internet Explorer is brave enough to ask to be your default browser, you're brave enough to ask for help to a older developer </p>
+    <div>
+  </section>
+
+  <section class="share-btns">
+    <!-- <p> share it if you like it~ </p> -->
+    <a
+  class="twitter-share-button"
+  data-size="large"
+  data-via="DrakeLeung"
+  href="https://twitter.com/intent/tweet?text=#Baby Steps Tests</p"
+>
+  Tweet
+</a>
+
+<script>
+  window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  js.async = true;
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));
+</script>
+
+  </section>
+</div>
+
+
+  
+</main>
+
+</body>
+</html>
